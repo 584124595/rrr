@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.box{
+				height: 150px;
+				width: 300px;
+				margin: 0 auto;
+			} 
+			.box ul{
+				list-style: none;
+			}
+			.box ul li{
+				line-height: 50px;
+			}
+			.box ul span{
+				padding-left: 25px;
+			}
+			.current{
+				background-color: #AAAAAA !important;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			window.onload=function(){
+				var lis=document.getElementsByTagName("li");
+				for(var i=0;i<lis.length;i++){
+					if(i%2==0){
+						lis[i].style.backgroundColor="#808080";
+					}else{
+						lis[i].style.backgroundColor="cadetblue";
+					}
+					lis[i].onmouseover=function(){
+						this.className="current";
+					}
+					lis[i].onmouseout=function(){
+						this.className="";
+					}
+				}
+			}
+		</script>
+		<div class="box">
+			<ul>
+				<li class="current">
+					<span>1</span>
+					<span>sss</span> 
+				</li>
+				<li>
+					<span>1</span>
+					<span>sss</span>
+				</li>
+				<li>
+					<span>1</span>
+					<span>sss</span>
+				</li>
+				<li>
+					<span>1</span>
+					<span>sss</span>
+				</li>
+				<li>
+					<span>1</span>
+					<span>sss</span>
+				</li>
+				<li>
+					<span>1</span>
+					<span>sss</span>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

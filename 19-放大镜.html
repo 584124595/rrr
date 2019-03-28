@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			img{
+				vertical-align: top;
+			}
+			.box{
+				width: 350px;
+				height: 350px;
+				border: 1px solid black;
+				margin: 100px;
+				position: relative;
+			}
+			.box .small{
+				position: relative;
+			}
+			.box .small .mask{
+				width: 100px;
+				height: 100px;
+				background: rgba(255,255,0,.4);
+				position: absolute;
+				left: 0;
+				top: 0;
+				cursor: move;
+				display: none;
+			}
+			.box .big{
+				width: 450px;
+				height: 450px;
+				border: 1px solid black;
+				position: absolute;
+				top: 0;
+				left: 360px;
+				overflow: hidden;
+				display: none;
+			}
+			.box .big img{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" id="box">
+			<div class="small">
+				<img src="img/one1.jpg" />
+				<!--遮罩层-->
+				<div class="mask"></div>
+			</div>
+			<div class="big">
+				<img src="img/0001.jpg" />
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementById("box");
+		var small=box.children[0];
+		var big=box.children[1];
+		var mask=small.children[1];
+		var bigImg=big.children[0];
+//		鼠标放到大盒子里面,遮罩层和big都显示
+		box.onmouseover=function(){
+			mask.style.display="block";
+			big.style.display="block";
+		}
+//		鼠标移出大盒子时,遮罩层和big都隐蔽
+		box.onmouseout=function(){
+			mask.style.display="none";
+			big.style.display="none";
+		}
+		var X=0;//mask在X方向移动的距离
+		var Y=0;//mask在X方向移动的距离
+		document.onmousemove=function(event){
+			event=event || window.event;
+			X=event.clientX-box.offsetLeft-mask.offsetWidth/2;
+			Y=event.clientY-box.offsetTop-mask.offsetHeight/2;
+			if(X<=0){
+				X=0;
+			}else if(X>=small.offsetWidth-mask.offsetWidth){
+				X=small.offsetWidth-mask.offsetWidth;
+			}
+			if(Y<=0){
+				Y=0;
+			}else if(Y>=small.offsetHeight-mask.offsetHeight){
+				Y=small.offsetHeight-mask.offsetHeight;
+			}
+			mask.style.left=X+"px";
+			mask.style.top=Y+"px";
+//			大图片移动距离
+			bigImg.style.left=-X*(big.offsetWidth/small.offsetWidth)+"px";
+			bigImg.style.top=-Y*(big.offsetHeight/small.offsetHeight)+"px";
+	}
+	</script>
+</html>
